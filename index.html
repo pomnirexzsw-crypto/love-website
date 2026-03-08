@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ถึงเธอ 💗</title>
+
+<style>
+
+body{
+margin:0;
+font-family:sans-serif;
+text-align:center;
+background:linear-gradient(135deg,#ff7aa8,#ff3d7f);
+color:white;
+overflow:hidden;
+}
+
+h1{
+margin-top:80px;
+font-size:38px;
+}
+
+button{
+padding:18px 35px;
+font-size:20px;
+border:none;
+border-radius:25px;
+background:white;
+color:#ff2d75;
+margin:12px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#box{
+margin-top:40px;
+font-size:24px;
+padding:20px;
+}
+
+#choices{
+margin-top:20px;
+}
+
+#couple{
+display:none;
+}
+
+#couple img{
+
+position:absolute;
+left:50%;
+top:55%;
+transform:translate(-50%,-50%) scale(0.8);
+
+width:300px;
+border-radius:25px;
+
+opacity:0;
+
+transition:all 2s ease;
+
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+
+}
+
+#couple img.active{
+opacity:1;
+transform:translate(-50%,-50%) scale(1);
+}
+
+#timer{
+position:absolute;
+bottom:40px;
+left:50%;
+transform:translateX(-50%);
+font-size:22px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>💗 มีข้อความถึงเธอ 💗</h1>
+
+<button onclick="start()">💌 เปิดอ่านดู</button>
+
+<div id="box"></div>
+
+<div id="choices" style="display:none">
+<button id="btn1" onclick="next()"></button>
+<button id="btn2" onclick="next()"></button>
+</div>
+
+<div id="couple">
+
+<img id="pic1" src="https://i.ibb.co/wFFTKxhK/Messenger-creation-DFBA5255-3079-4333-95-D7-2-EB49145052-C.jpg">
+<img id="pic2" src="https://i.ibb.co/1fJP4n93/photo.jpg">
+<img id="pic3" src="https://i.ibb.co/chL1RkfG/photo.jpg">
+<img id="pic4" src="https://i.ibb.co/3m9xGw9Z/photo.jpg">
+<img id="pic5" src="https://i.ibb.co/8gMcCFSB/photo.jpg">
+<img id="pic6" src="https://i.ibb.co/tPQ1J1Lm/photo.jpg">
+<img id="pic7" src="https://i.ibb.co/rqBYhYc/photo.jpg">
+<img id="pic8" src="https://i.ibb.co/DD17bJzv/photo.jpg">
+
+<div id="timer"></div>
+
+</div>
+
+<iframe id="music"
+src="https://www.youtube.com/embed/6v0YqvH0K9Q"
+width="0"
+height="0"
+allow="autoplay">
+</iframe>
+
+<script>
+
+let messages=[
+"เค้ารักเธอมากๆ",
+"อยากใช้เวลาอยู่กับเธอนานๆ",
+"เค้ามีความสุขมากเวลาอยู่กับเธอ",
+"ขอบคุณที่อยู่ข้างกันเสมอ",
+"เรามีคำถามหนึ่งจะถาม..."
+];
+
+let answers=[
+["💗 รักเหมือนกัน","😏 โม้หรือเปล่า"],
+["😊 เค้าก็เหมือน","🙄 ไม่ได้อยากอยู่ด้วย"],
+["🥰 เค้าก็มีความสุข","😒 ไม่เห็นจะขนาดนั้น"],
+["💞 อยู่ด้วยกันตลอดนะ","😂 เดี๋ยวก็เบื่อ"],
+["😳 ถามมาเลย","🙈 กลัวคำถาม"]
+];
+
+let i=0;
+
+function start(){
+
+document.getElementById("box").innerText=messages[0];
+
+document.getElementById("btn1").innerText=answers[0][0];
+document.getElementById("btn2").innerText=answers[0][1];
+
+document.getElementById("choices").style.display="block";
+
+i=1;
+
+}
+
+function next(){
+
+if(i < messages.length){
+
+document.getElementById("box").innerText=messages[i];
+
+document.getElementById("btn1").innerText=answers[i][0];
+document.getElementById("btn2").innerText=answers[i][1];
+
+i++;
+
+}else{
+
+let answer=prompt("เราคบกันกี่เดือน/ปี");
+
+if(answer=="8เดือน"){
+
+document.getElementById("box").innerText="💗 เก่งมาก เรารักเธอนะ 💗";
+
+document.getElementById("choices").style.display="none";
+
+document.getElementById("couple").style.display="block";
+
+playMusic();
+showPictures();
+startTimer();
+
+}else{
+
+alert("ตอบผิด ลองใหม่นะ");
+
+}
+
+}
+
+}
+
+function playMusic(){
+
+document.getElementById("music").src=
+"https://www.youtube.com/embed/6v0YqvH0K9Q?autoplay=1&loop=1&playlist=6v0YqvH0K9Q";
+
+}
+
+function showPictures(){
+
+let pics=[
+"pic1","pic2","pic3","pic4",
+"pic5","pic6","pic7","pic8"
+];
+
+let index=0;
+
+setInterval(function(){
+
+for(let i=0;i<pics.length;i++){
+document.getElementById(pics[i]).classList.remove("active");
+}
+
+document.getElementById(pics[index]).classList.add("active");
+
+index++;
+
+if(index>=pics.length){
+index=0;
+}
+
+},4000);
+
+}
+
+function startTimer(){
+
+let startDate=new Date("2025-07-16");
+
+setInterval(function(){
+
+let now=new Date();
+
+let diff=now-startDate;
+
+let days=Math.floor(diff/(1000*60*60*24));
+let hours=Math.floor(diff/(1000*60*60)%24);
+let minutes=Math.floor(diff/(1000*60)%60);
+
+document.getElementById("timer").innerHTML=
+"💞 เราคบกันมาแล้ว "+days+" วัน "+hours+" ชั่วโมง "+minutes+" นาที";
+
+},1000);
+
+}
+
+</script>
+
+</body>
+</html>
